@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book a Detail — LuxeDrive Auto Studio</title>
+<meta name="description" content="Schedule your detailing appointment. Choose a service, vehicle type and preferred date.">
+<link rel="canonical" href="https://www.luxedriveautostudio.example/booking.html">
+<meta property="og:title" content="Book a Detail — LuxeDrive Auto Studio">
+<meta property="og:description" content="Schedule your detailing appointment. Choose a service, vehicle type and preferred date.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="shortcut icon" href="assets/images/icon.png" type="image/x-icon">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<script>/* Bootstrap: restore saved theme + direction before first paint, and arm the preloader (auto-clears after 6s if preloader.js fails) */(function(d){try{var t=localStorage.getItem('luxedrive-theme'),r=localStorage.getItem('luxedrive-dir');if(t)d.setAttribute('data-theme',t);if(r)d.setAttribute('dir',r)}catch(e){}d.classList.add('pl-active');setTimeout(function(){d.classList.remove('pl-active')},6000)})(document.documentElement);</script>
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/motion.css">
+<link rel="stylesheet" href="assets/css/preloader.css">
+<!-- Theme & direction overrides — keep these last -->
+<link rel="stylesheet" href="assets/css/dark-mode.css">
+<link rel="stylesheet" href="assets/css/rtl.css">
+<script src="assets/js/preloader.js" defer></script>
+<script>/* Motion guard: hides animated elements until motion.js sets their start state (auto-clears after 2.5s) */(function(d){if(!window.matchMedia||!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('motion-pending');setTimeout(function(){d.classList.remove('motion-pending')},2500)}})(document.documentElement);</script>
+</head>
+<body>
+<!-- Preloader (see assets/css/preloader.css + assets/js/preloader.js) -->
+<div class="preloader" role="status" aria-label="Loading LuxeDrive Auto Studio">
+  <div class="preloader-mark" aria-hidden="true">
+    <span class="preloader-word">LuxeDrive</span>
+    <span class="preloader-sub">Auto Studio</span>
+  </div>
+  <div class="preloader-meter" aria-hidden="true">
+    <div class="preloader-bar"><span></span></div>
+    <span class="preloader-count">00</span>
+  </div>
+</div>
+<a href="#main" class="skip-link">Skip to content</a>
+<header class="site-header">
+  <div class="container-wide header-inner">
+    <a href="index.html" class="logo"><img src="assets/images/logo.png" alt="LuxeDrive Auto Studio" class="logo-img"></a>
+    <nav class="main-nav" aria-label="Primary">
+      <div class="nav-dropdown">
+        <a href="index.html" class="nav-dropdown-toggle" aria-haspopup="true">Home</a>
+        <div class="nav-dropdown-menu" role="menu">
+          <a href="index.html" role="menuitem">Home</a>
+          <a href="home-2.html" role="menuitem">Home 2</a>
+        </div>
+      </div>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" data-theme-toggle aria-label="Toggle dark / light theme"><i class="bi bi-moon-stars"></i></button>
+      <button class="icon-btn" data-dir-toggle aria-label="Toggle RTL layout"><i class="bi bi-text-right"></i></button>
+      <a href="booking.html" class="btn btn-primary d-none d-lg-inline-flex">Book a Detail</a>
+      <button class="nav-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<nav class="offcanvas-nav" aria-label="Mobile">
+  <button class="offcanvas-close icon-btn" aria-label="Close menu"><i class="bi bi-x-lg"></i></button>
+  <div class="offcanvas-home-group">
+    <span class="offcanvas-home-label">Home</span>
+    <a href="index.html">Home</a>
+    <a href="home-2.html">Home 2</a>
+  </div>
+  <a href="about.html">About</a>
+  <a href="services.html">Services</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="blog.html">Blog</a>
+  <a href="contact.html">Contact</a>
+  <a href="booking.html" class="btn btn-primary mt-4">Book a Detail</a>
+</nav>
+<main id="main">
+<section class="page-hero">
+  <div class="container-wide">
+    <div class="breadcrumb"><a href="index.html">Home</a><i class="bi bi-chevron-right crumb-sep"></i><span>Booking</span></div>
+    <p class="label label--accent">Schedule</p>
+    <h1 class="display-1">BOOK YOUR<br>DETAIL.</h1>
+  </div>
+</section>
+<section class="section-tight">
+  <div class="container-wide booking-layout">
+    <form data-validate novalidate id="bookingForm" action="https://formspree.io/f/TODO" method="POST">
+      <!-- TODO: replace with Calendly / Google Calendar / custom booking API -->
+      <div class="row">
+        <div class="col-md-6"><div class="field"><label for="b-name">Full Name</label><input id="b-name" name="name" required><span class="err">Please enter your name.</span></div></div>
+        <div class="col-md-6"><div class="field"><label for="b-email">Email</label><input id="b-email" type="email" name="email" required><span class="err">Please enter a valid email.</span></div></div>
+        <div class="col-md-6"><div class="field"><label for="b-phone">Phone</label><input id="b-phone" name="phone" required><span class="err">Please enter your phone number.</span></div></div>
+        <div class="col-md-6"><div class="field"><label for="b-vtype">Vehicle Type</label>
+          <select id="b-vtype" name="vehicle_type" required data-summary-target="vtype">
+            <option value="">Select vehicle type</option>
+            <option>Sedan</option><option>Coupe</option><option>SUV</option><option>Truck</option>
+            <option>Sports Car</option><option>Luxury Vehicle</option><option>Motorcycle</option>
+          </select><span class="err">Please select a vehicle type.</span>
+        </div></div>
+        <div class="col-md-6"><div class="field"><label for="b-make">Vehicle Make</label><input id="b-make" name="make" required><span class="err">Please enter the make.</span></div></div>
+        <div class="col-md-6"><div class="field"><label for="b-model">Vehicle Model</label><input id="b-model" name="model" required><span class="err">Please enter the model.</span></div></div>
+        <div class="col-md-6"><div class="field"><label for="b-year">Vehicle Year</label><input id="b-year" name="year" type="number" min="1960" max="2027" required><span class="err">Please enter a valid year.</span></div></div>
+        <div class="col-md-6"><div class="field"><label for="b-service">Desired Service</label>
+          <select id="b-service" name="service" required data-summary-target="service">
+            <option value="">Select a service</option>
+            <option data-price="$149" data-duration="2–3 hrs">Exterior Detail</option>
+            <option data-price="$349" data-duration="4–8 hrs">Paint Correction</option>
+            <option data-price="$599" data-duration="1–2 days">Ceramic Coating</option>
+            <option data-price="$1,199" data-duration="1–3 days">Paint Protection Film</option>
+            <option data-price="$199" data-duration="2–3 hrs">Interior Detail</option>
+          </select><span class="err">Please select a service.</span>
+        </div></div>
+        <div class="col-md-6"><div class="field"><label for="b-date">Preferred Date</label><input id="b-date" type="date" name="date" required data-summary-target="date"><span class="err">Please select a date.</span></div></div>
+        <div class="col-md-6"><div class="field"><label for="b-time">Preferred Time</label><input id="b-time" type="time" name="time" required><span class="err">Please select a time.</span></div></div>
+        <div class="col-12"><div class="field"><label for="b-notes">Additional Notes</label><textarea id="b-notes" name="notes" rows="4"></textarea></div></div>
+      </div>
+      <button type="submit" class="btn btn-primary">Confirm Booking <i class="bi bi-arrow-right"></i></button>
+    </form>
+    <div class="form-success mt-3"><i class="bi bi-check-circle icon-accent-lg"></i><p class="mt-2">Your booking request has been received. We'll confirm your appointment by email shortly.</p></div>
+
+    <aside class="summary-box">
+      <p class="label label--accent">Appointment Summary</p>
+      <div class="summary-row"><span class="k">Selected Service</span><span id="sum-service">—</span></div>
+      <div class="summary-row"><span class="k">Estimated Duration</span><span id="sum-duration">—</span></div>
+      <div class="summary-row"><span class="k">Starting Price</span><span id="sum-price">—</span></div>
+      <div class="summary-row no-border-bottom"><span class="k">Preferred Date</span><span id="sum-date">—</span></div>
+    </aside>
+  </div>
+</section>
+</main>
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+<footer class="site-footer">
+  <div class="container-wide footer-grid">
+    <div>
+      <a href="index.html" class="logo d-block mb-3"><img src="assets/images/logo.png" alt="LuxeDrive Auto Studio" class="logo-img"></a>
+      <p>Precision Service.<br>Every Surface.</p>
+      <div class="field mt-4 footer-newsletter">
+        <label for="newsletter">Detailing notes. Straight to your inbox.</label>
+        <div class="d-flex gap-2">
+          <input type="email" id="newsletter" placeholder="you@example.com">
+          <button class="btn btn-outline" type="button"><i class="bi bi-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h4>Navigation</h4>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div>
+      <h4>Services</h4>
+      <a href="service-details.html">Paint Correction</a>
+      <a href="service-details.html">Ceramic Coating</a>
+      <a href="service-details.html">PPF</a>
+      <a href="service-details.html">Interior Detailing</a>
+      <a href="service-details.html">Exterior Detailing</a>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <a href="contact.html"><i class="bi bi-geo-alt me-2"></i>Chennai, Tamil Nadu</a>
+      <a href="tel:+919876543210"><i class="bi bi-telephone me-2"></i>+91 98765 43210</a>
+      <a href="mailto:hello@luxedriveautostudio.example"><i class="bi bi-envelope me-2"></i>hello@luxedriveautostudio.example</a>
+    </div>
+  </div>
+  <div class="container-wide footer-bottom">
+    <span>© 2026 LuxeDrive Auto Studio. All rights reserved.</span>
+    <div class="social-row">
+      <a href="#" class="icon-btn" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+      <a href="#" class="icon-btn" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+      <a href="#" class="icon-btn" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+    </div>
+  </div>
+</footer>
+<script>
+document.getElementById('b-service')?.addEventListener('change', function(){
+  const opt = this.selectedOptions[0];
+  document.getElementById('sum-service').textContent = opt.value || '—';
+  document.getElementById('sum-duration').textContent = opt.dataset.duration || '—';
+  document.getElementById('sum-price').textContent = opt.dataset.price || '—';
+});
+document.getElementById('b-date')?.addEventListener('change', function(){
+  document.getElementById('sum-date').textContent = this.value || '—';
+});
+</script>
+<script src="assets/js/main.js"></script>
+<!-- Motion layer: GSAP + ScrollTrigger + Lenis (deferred, progressive enhancement) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+<script src="assets/js/motion.js" defer></script>
+</body>
+</html>

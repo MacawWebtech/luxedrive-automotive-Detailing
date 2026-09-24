@@ -1,0 +1,145 @@
+/* =========================================================
+   LuxeDrive Auto Studio — Right-to-left (RTL)
+   ---------------------------------------------------------
+   Everything that only applies when <html dir="rtl"> is set.
+   The header toggle switches direction and saves it in
+   localStorage as `luxedrive-dir`; for a permanently Arabic /
+   Hebrew / Urdu site, set dir="rtl" (and the right lang) on
+   each page's <html> instead.
+
+   Flex and grid rows, text alignment defaults and logical
+   properties (margin-inline, padding-block…) already follow
+   the direction on their own. This file handles the rest:
+   physical left/right offsets, slide/sweep directions,
+   directional icons and one-sided borders.
+
+   Load order: last, after style.css, motion.css,
+   preloader.css and dark-mode.css.
+========================================================= */
+
+/* ---------------------------------------------------------
+   1. Directional icons — mirror so arrows point "forward"
+--------------------------------------------------------- */
+html[dir="rtl"] .bi-arrow-right,
+html[dir="rtl"] .bi-arrow-up-right,
+html[dir="rtl"] .bi-chevron-right{
+  display:inline-block;
+  transform:scaleX(-1);
+}
+/* hover nudges keep the mirror (translate runs in the mirrored axis) */
+html[dir="rtl"] .btn:hover .bi-arrow-right{transform:scaleX(-1) translateX(4px);}
+html[dir="rtl"] .svc-row:hover .svc-arrow{transform:scaleX(-1) translateX(6px);}
+html[dir="rtl"] .ct-quick-go{transform:scaleX(-1);}
+html[dir="rtl"] .ct-quick-item:hover .ct-quick-go{transform:scaleX(-1) translateX(3px);}
+
+/* ---------------------------------------------------------
+   2. Header, navigation & off-canvas menu
+--------------------------------------------------------- */
+html[dir="rtl"] .skip-link{left:auto;right:1rem;}
+html[dir="rtl"] .main-nav{direction:rtl;}
+
+/* off-canvas slides in from the left edge */
+html[dir="rtl"] .offcanvas-nav{transform:translateX(-100%);}
+html[dir="rtl"] .offcanvas-nav.is-open{transform:translateX(0);}
+html[dir="rtl"] .offcanvas-close{right:auto;left:1.25rem;}
+html[dir="rtl"] .offcanvas-home-group > a{padding:.45rem 1rem .45rem 0!important;}
+html[dir="rtl"] .offcanvas-home-group > a::before{content:"↲";margin-right:0;margin-left:.55rem;}
+
+/* ---------------------------------------------------------
+   3. Hero & home sections
+--------------------------------------------------------- */
+html[dir="rtl"] .hero-tags{direction:rtl;}
+html[dir="rtl"] .scroll-indicator{right:auto;left:clamp(1.25rem,4vw,3.5rem);}
+
+/* services list: dark fade starts from the text side */
+html[dir="rtl"] .svc-bg::after{
+  background:linear-gradient(270deg,rgba(8,9,10,.94) 15%,rgba(8,9,10,.55));
+}
+
+/* process steps: body text indented from the number side */
+html[dir="rtl"] .process-body p{padding-left:0;padding-right:calc(1.6rem + 1.5rem);}
+
+/* Home 2 — service bays */
+html[dir="rtl"] .h2-bay{text-align:right;}
+html[dir="rtl"] .h2-bay::before{transform-origin:right;}
+@media (max-width:760px){
+  html[dir="rtl"] .h2-bay .bay-tab{left:auto;right:1.25rem;}
+}
+
+/* ---------------------------------------------------------
+   4. Gallery, blog & service details
+--------------------------------------------------------- */
+html[dir="rtl"] .gallery-item .gi-tag{left:auto;right:1rem;}
+
+html[dir="rtl"] .bd-body blockquote{
+  border-left:0;padding-left:0;
+  border-right:2px solid var(--accent);padding-right:1.5rem;
+}
+
+/* key sits on the right, value on the left — the natural RTL order */
+html[dir="rtl"] .tech-specs li{flex-direction:row;}
+
+html[dir="rtl"] .compare-table th,
+html[dir="rtl"] .compare-table td{text-align:right;}
+
+@media (max-width:900px){
+  html[dir="rtl"] .pricing-row{text-align:right;}
+}
+
+/* ---------------------------------------------------------
+   5. Footer
+--------------------------------------------------------- */
+html[dir="rtl"] .footer-bottom{direction:rtl;}
+@media (max-width:560px){
+  html[dir="rtl"] .footer-grid{text-align:right;}
+}
+
+/* ---------------------------------------------------------
+   6. Motion layer (motion.css)
+--------------------------------------------------------- */
+html[dir="rtl"] .m-story-bar{transform-origin:right;}
+html[dir="rtl"] .m-progress{transform-origin:right;}
+html[dir="rtl"] .m-top{right:auto;left:clamp(1rem,2.5vw,2rem);}
+
+/* nav underline sweeps in from the right, out to the left */
+html[dir="rtl"].has-motion .main-nav a::after{transform-origin:left;}
+html[dir="rtl"].has-motion .main-nav a:hover::after,
+html[dir="rtl"].has-motion .main-nav a.active::after{transform-origin:right;}
+html[dir="rtl"].has-motion .main-nav:hover a.active:not(:hover)::after{transform-origin:left;}
+
+/* button sheen travels right → left */
+html[dir="rtl"].has-motion .btn-primary::after{
+  background:linear-gradient(-105deg,transparent 30%,rgba(255,255,255,.32) 50%,transparent 70%);
+  transform:translateX(120%);
+}
+html[dir="rtl"].has-motion .btn-primary:hover::after{transform:translateX(-120%);}
+
+/* ---------------------------------------------------------
+   7. Preloader (preloader.css)
+--------------------------------------------------------- */
+html[dir="rtl"] .preloader-bar span{transform-origin:right;}
+html[dir="rtl"] .preloader-word{
+  background-position:-100% 0;
+  animation-name:plSheenRtl;
+}
+@keyframes plSheenRtl{
+  0%,20%{background-position:-100% 0;}
+  80%,100%{background-position:200% 0;}
+}
+
+/* ---------------------------------------------------------
+   8. Arabic / Persian / Urdu script
+   Only kicks in when the page language is set, e.g.
+   <html lang="ar" dir="rtl">. Tracking and uppercase break
+   joined scripts, and Rajdhani / Inter have no Arabic glyphs,
+   so fall back to a suitable face (add its Google Fonts link
+   in <head>, e.g. "Noto Kufi Arabic" or "Tajawal").
+--------------------------------------------------------- */
+html[dir="rtl"]:is(:lang(ar),:lang(fa),:lang(ur)){
+  --font-display:'Noto Kufi Arabic','Tajawal','Rajdhani',sans-serif;
+  --font-body:'Noto Kufi Arabic','Tajawal','Inter',sans-serif;
+}
+html[dir="rtl"]:is(:lang(ar),:lang(fa),:lang(ur)) *{
+  letter-spacing:0!important;
+  text-transform:none!important;
+}

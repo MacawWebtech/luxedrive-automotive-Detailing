@@ -1,0 +1,54 @@
+/* =========================================================
+   LuxeDrive Auto Studio — Dark mode
+   ---------------------------------------------------------
+   Everything that only applies in the dark theme lives here.
+   style.css carries the base (light) palette; this file
+   overrides it whenever <html data-theme="dark"> is set.
+
+   Dark is the brand default: every page ships with
+   data-theme="dark", and the header toggle switches to
+   "light" (saved in localStorage as `luxedrive-theme`).
+
+   Load order: after style.css and motion.css.
+   To drop dark mode entirely, remove this <link> and change
+   data-theme="dark" to "light" on each page's <html>.
+========================================================= */
+
+/* ---------------------------------------------------------
+   1. Colour tokens
+--------------------------------------------------------- */
+html[data-theme="dark"]{
+  --bg-primary:#08090A;
+  --bg-secondary:#101214;
+  --bg-surface:#17191C;
+
+  --text-primary:#F5F5F2;
+  --text-secondary:#A5A8AC;
+  --text-muted:#70747A;
+
+  --border:rgba(255,255,255,0.10);
+  --border-strong:rgba(255,255,255,0.18);
+
+  /* native form controls, date pickers and scrollbars go dark too */
+  color-scheme:dark;
+}
+
+/* ---------------------------------------------------------
+   2. Motion layer (motion.css)
+   Header at the top of the page: a soft dark scrim instead
+   of the flat light tint used in light mode.
+--------------------------------------------------------- */
+html[data-theme="dark"].has-motion .site-header::after{
+  background:linear-gradient(180deg,rgba(8,9,10,.6),rgba(8,9,10,0));
+}
+
+/* ---------------------------------------------------------
+   3. Preloader (preloader.css)
+   Uses the theme tokens already. On near-black the wordmark
+   goes to a satin grey so a white highlight can roll across
+   it, like studio light over freshly polished paint.
+--------------------------------------------------------- */
+html[data-theme="dark"] .preloader{
+  --pl-ink:rgba(245,245,242,.5);
+  --pl-sheen:#FFFFFF;
+}

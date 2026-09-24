@@ -1,0 +1,165 @@
+/* =========================================================
+   LuxeDrive — Motion layer
+   Loaded after style.css. Everything here is either inert
+   until motion.js adds .has-motion to <html>, or is a small
+   always-on utility (progress bar, back-to-top). With no JS,
+   a blocked CDN or reduced motion, the site renders as before.
+========================================================= */
+
+/* ---------- Lenis smooth scroll (official base styles) ---------- */
+html.lenis, html.lenis body{height:auto;}
+.lenis.lenis-smooth{scroll-behavior:auto !important;}
+.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain;}
+.lenis.lenis-stopped{overflow:hidden;}
+
+/* ---------- Pre-paint guard ----------
+   A tiny inline script in <head> adds .motion-pending so hero copy and
+   reveal targets don't flash before GSAP sets their start states.
+   It removes itself after 2.5s no matter what, so content can't get stuck. */
+.motion-pending .hero-content,
+.motion-pending .h2-hero-copy,
+.motion-pending .h2-hero-media,
+.motion-pending .sd-hero-content,
+.motion-pending .bd-hero-content,
+.motion-pending .cs-content,
+.motion-pending .err-content,
+.motion-pending [class^="page-hero"] > .container-wide,
+.motion-pending [data-reveal]{opacity:0 !important;transition:none !important;}
+
+/* GSAP owns reveal animation once motion is active */
+.has-motion [data-reveal]{opacity:1;transform:none;transition:none;}
+.m-animating{transition:none !important;}
+
+/* ---------- Split text ---------- */
+.m-line{display:block;}
+.m-mask{display:inline-block;overflow:hidden;vertical-align:top;
+  padding-bottom:.1em;margin-bottom:-.1em; /* keeps descenders inside the mask */
+  padding-inline:.02em;margin-inline:-.02em;}
+.m-word{display:inline-block;}
+
+/* ---------- Image wrappers (clip reveal + parallax layer) ---------- */
+.m-clip{display:block;width:100%;height:100%;overflow:hidden;position:relative;}
+.m-move{display:block;width:100%;height:100%;will-change:transform;}
+.m-move > img{width:100%;height:100%;}
+
+/* Card images keep their own aspect-ratio box. Without this, height:100%
+   resolves against the stretched grid card, the photo grows to the full
+   card height and pushes the text out past the grid (overlapping pagination). */
+.blog-card .m-clip,.svc-dir-card .m-clip,.team-card .m-clip,
+.blog-card .m-move,.svc-dir-card .m-move,.team-card .m-move{height:auto;}
+.blog-card .m-move > img,.svc-dir-card .m-move > img,.team-card .m-move > img{height:auto;}
+
+/* Card image hover zoom — wrapper clips, so the card never grows */
+.has-motion .svc-dir-card img,
+.has-motion .blog-card img,
+.has-motion .team-card img{transition:transform 1.1s var(--ease),filter .6s var(--ease);}
+.has-motion .svc-dir-card:hover img,
+.has-motion .blog-card:hover img,
+.has-motion .team-card:hover img{transform:scale(1.06);}
+.has-motion .gallery-item img{transition:transform 1.1s var(--ease);}
+
+/* 3D tilt cards: GSAP drives transform, so CSS must not transition it */
+.has-motion .m-tilt{transition-property:background-color,border-color,color,box-shadow !important;transform-style:preserve-3d;}
+
+/* Horizontal drift must never create page overflow */
+.m-clip-x{overflow-x:clip;}
+
+/* ---------- Background-image parallax on pseudo layers ---------- */
+.has-motion .m-bg-par{overflow:hidden;}
+.has-motion .m-bg-par::before{
+  transform:translate3d(0,var(--m-bg-y,0%),0) scale(1.18);
+  will-change:transform;
+}
+
+/* ---------- Home 2 pinned story: stacked images ---------- */
+.m-story-stack{position:absolute;inset:0;}
+.m-story-stack img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.m-story-bar{position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--accent);
+  transform:scaleX(0);transform-origin:left;z-index:3;}
+
+/* ---------- Header: transparent → solid ---------- */
+.has-motion .site-header{background:transparent;backdrop-filter:none;}
+.has-motion .site-header::before,
+.has-motion .site-header::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  transition:opacity .6s var(--ease);}
+/* solid state */
+.has-motion .site-header::before{
+  background:color-mix(in srgb, var(--bg-primary) 92%, transparent);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);opacity:0;}
+/* top state: the original tint (light); the dark scrim is in dark-mode.css */
+.has-motion .site-header::after{background:color-mix(in srgb, var(--bg-primary) 78%, transparent);}
+.has-motion .site-header.is-scrolled::before{opacity:1;}
+.has-motion .site-header.is-scrolled::after{opacity:0;}
+@media (min-width:1025px){
+  .has-motion .site-header.is-scrolled{height:74px;}
+}
+
+/* Nav: underline sweeps in from the left, out to the right */
+.has-motion .main-nav a{transition:color .4s var(--ease),opacity .4s var(--ease);}
+.has-motion .main-nav a::after{transform-origin:right;transition:transform .5s var(--ease);}
+.has-motion .main-nav a:hover::after,
+.has-motion .main-nav a.active::after{transform-origin:left;}
+/* While hovering the menu, the active link's underline yields to the hovered one */
+.has-motion .main-nav:hover a.active:not(:hover)::after{transform:scaleX(0);transform-origin:right;}
+.has-motion .main-nav:hover a:not(:hover){opacity:.62;}
+
+/* ---------- Buttons ---------- */
+.has-motion .btn-primary,
+.has-motion .btn-outline{position:relative;isolation:isolate;overflow:hidden;}
+/* light sheen across primary buttons */
+.has-motion .btn-primary::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.32) 50%,transparent 70%);
+  transform:translateX(-120%);transition:transform .9s var(--ease);}
+.has-motion .btn-primary:hover::after{transform:translateX(120%);}
+/* soft fill rising behind outline buttons */
+.has-motion .btn-outline::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:color-mix(in srgb, var(--accent) 12%, transparent);
+  transform:scaleY(0);transform-origin:bottom;transition:transform .55s var(--ease);}
+.has-motion .btn-outline:hover::before{transform:scaleY(1);}
+/* magnetic elements: GSAP moves them, CSS only fades colours */
+.has-motion .is-magnetic{transition-property:background-color,color,border-color,opacity,box-shadow !important;}
+
+/* ---------- Scroll progress ---------- */
+.m-progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:1001;pointer-events:none;
+  background:var(--accent);transform:scaleX(0);transform-origin:left;}
+
+/* ---------- Back to top ---------- */
+.m-top{position:fixed;right:clamp(1rem,2.5vw,2rem);bottom:clamp(1rem,2.5vw,2rem);z-index:900;
+  width:52px;height:52px;border-radius:50%;border:0;padding:0;
+  display:grid;place-items:center;color:var(--text-primary);
+  background:color-mix(in srgb, var(--bg-surface) 88%, transparent);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  box-shadow:0 10px 30px -12px rgba(0,0,0,.6);
+  opacity:0;visibility:hidden;transform:translateY(16px) scale(.85);
+  transition:opacity .5s var(--ease),transform .6s var(--ease),visibility 0s linear .6s,color .3s var(--ease);}
+.m-top.is-visible{opacity:1;visibility:visible;transform:none;transition-delay:0s;}
+.m-top:hover{color:var(--accent);}
+.m-top svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);}
+.m-top circle{fill:none;stroke-width:1.5;}
+.m-top .m-top-track{stroke:var(--border-strong);}
+.m-top .m-top-ring{stroke:var(--accent);stroke-linecap:round;}
+.m-top .bi{position:relative;font-size:1rem;transition:transform .4s var(--ease);}
+.m-top:hover .bi{transform:translateY(-3px);}
+
+/* ---------- Cursor follower (desktop, fine pointer only) ---------- */
+.m-cursor,.m-cursor-dot{position:fixed;top:0;left:0;z-index:1200;pointer-events:none;border-radius:50%;opacity:0;}
+.m-cursor{width:38px;height:38px;margin:-19px 0 0 -19px;border:1px solid color-mix(in srgb, var(--accent) 70%, transparent);
+  transition:opacity .3s var(--ease),width .45s var(--ease),height .45s var(--ease),margin .45s var(--ease),background-color .45s var(--ease),border-color .45s var(--ease);}
+.m-cursor-dot{width:5px;height:5px;margin:-2.5px 0 0 -2.5px;background:var(--accent);transition:opacity .3s var(--ease);}
+.m-cursor.is-active,.m-cursor-dot.is-active{opacity:1;}
+.m-cursor.is-hover{width:64px;height:64px;margin:-32px 0 0 -32px;border-color:transparent;
+  background:color-mix(in srgb, var(--accent) 14%, transparent);}
+.m-cursor.is-hover + .m-cursor-dot{opacity:0;}
+.m-cursor.is-scrub{width:72px;height:28px;margin:-14px 0 0 -36px;border-radius:14px;}
+
+/* ---------- Mobile menu ---------- */
+.offcanvas-nav{overscroll-behavior:contain;}
+
+/* ---------- Reduced motion: hard stop on everything above ---------- */
+@media (prefers-reduced-motion: reduce){
+  .m-cursor,.m-cursor-dot{display:none !important;}
+  .has-motion .m-bg-par::before{transform:scale(1.02);}
+}
+@media (hover:none),(pointer:coarse){
+  .m-cursor,.m-cursor-dot{display:none !important;}
+}

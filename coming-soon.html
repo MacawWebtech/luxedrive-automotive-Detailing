@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coming Soon — LuxeDrive Auto Studio</title>
+<meta name="description" content="A new standard is arriving. Sign up to be first to know.">
+<link rel="canonical" href="https://www.luxedriveautostudio.example/coming-soon.html">
+<meta property="og:title" content="Coming Soon — LuxeDrive Auto Studio">
+<meta property="og:description" content="A new standard is arriving. Sign up to be first to know.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="shortcut icon" href="assets/images/icon.png" type="image/x-icon">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<script>/* Bootstrap: restore saved theme + direction before first paint, and arm the preloader (auto-clears after 6s if preloader.js fails) */(function(d){try{var t=localStorage.getItem('luxedrive-theme'),r=localStorage.getItem('luxedrive-dir');if(t)d.setAttribute('data-theme',t);if(r)d.setAttribute('dir',r)}catch(e){}d.classList.add('pl-active');setTimeout(function(){d.classList.remove('pl-active')},6000)})(document.documentElement);</script>
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/motion.css">
+<link rel="stylesheet" href="assets/css/preloader.css">
+<!-- Theme & direction overrides — keep these last -->
+<link rel="stylesheet" href="assets/css/dark-mode.css">
+<link rel="stylesheet" href="assets/css/rtl.css">
+<script src="assets/js/preloader.js" defer></script>
+<script>/* Motion guard: hides animated elements until motion.js sets their start state (auto-clears after 2.5s) */(function(d){if(!window.matchMedia||!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('motion-pending');setTimeout(function(){d.classList.remove('motion-pending')},2500)}})(document.documentElement);</script>
+</head>
+<body>
+<!-- Preloader (see assets/css/preloader.css + assets/js/preloader.js) -->
+<div class="preloader" role="status" aria-label="Loading LuxeDrive Auto Studio">
+  <div class="preloader-mark" aria-hidden="true">
+    <span class="preloader-word">LuxeDrive</span>
+    <span class="preloader-sub">Auto Studio</span>
+  </div>
+  <div class="preloader-meter" aria-hidden="true">
+    <div class="preloader-bar"><span></span></div>
+    <span class="preloader-count">00</span>
+  </div>
+</div>
+<a href="#main" class="skip-link">Skip to content</a>
+<main id="main">
+<section class="cs-hero">
+  <img src="https://picsum.photos/seed/coming-soon/1920/1200" alt="Dark studio bay with ambient automotive lighting">
+  <div class="cs-content">
+    <p class="label label--accent">Reopening Soon</p>
+    <h1 class="display-1">A NEW STANDARD<br>IS ARRIVING.</h1>
+    <div class="countdown" id="countdown">
+      <div class="cd-item"><div class="n" id="cd-days">00</div><div class="l">Days</div></div>
+      <div class="cd-item"><div class="n" id="cd-hours">00</div><div class="l">Hours</div></div>
+      <div class="cd-item"><div class="n" id="cd-mins">00</div><div class="l">Mins</div></div>
+      <div class="cd-item"><div class="n" id="cd-secs">00</div><div class="l">Secs</div></div>
+    </div>
+    <div class="field mt-4 newsletter-center">
+      <label for="cs-email">Get notified at launch</label>
+      <div class="d-flex gap-2"><input id="cs-email" type="email" placeholder="you@example.com"><button class="btn btn-primary" type="button">Notify Me</button></div>
+    </div>
+    <div class="social-row mt-4 justify-center">
+      <a href="#" class="icon-btn" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+      <a href="#" class="icon-btn" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+      <a href="#" class="icon-btn" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+    </div>
+  </div>
+</section>
+</main>
+<script src="assets/js/main.js"></script>
+<!-- Motion layer: GSAP + ScrollTrigger + Lenis (deferred, progressive enhancement) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+<script src="assets/js/motion.js" defer></script>
+<script>
+const launchDate = new Date(Date.now() + 1000*60*60*24*14).getTime();
+function tick(){
+  const dist = launchDate - Date.now();
+  if(dist < 0) return;
+  document.getElementById('cd-days').textContent = String(Math.floor(dist/86400000)).padStart(2,'0');
+  document.getElementById('cd-hours').textContent = String(Math.floor(dist%86400000/3600000)).padStart(2,'0');
+  document.getElementById('cd-mins').textContent = String(Math.floor(dist%3600000/60000)).padStart(2,'0');
+  document.getElementById('cd-secs').textContent = String(Math.floor(dist%60000/1000)).padStart(2,'0');
+}
+setInterval(tick,1000); tick();
+</script>
+</body>
+</html>
